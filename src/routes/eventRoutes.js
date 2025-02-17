@@ -30,7 +30,6 @@ router.put('/events/:id', async (req, res) => {
 });
 
 // Rota para criar um novo evento
-router.post('/events', createEvent);
 router.post('/create', async (req, res) => {
   const { nome, descricao, data_inicio, data_fim, local } = req.body;
 

@@ -18,22 +18,28 @@ const updateEvent = async (req, res) => {
   const { nome, descricao, data_inicio, data_fim, local } = req.body;
 
   try {
-    const updatedEvent = await Event.findByIdAndUpdate(id, {
-      nome,
-      descricao,
-      data_inicio,
-      data_fim,
-      local
-    }, { new: true });
+      // Verificar se o evento existe antes de atualizar
+      const event = await Event.findById(id);
+      console.log("Evento encontrado:", event);
 
-    if (!updatedEvent) {
-      return res.status(404).json({ msg: 'Evento não encontrado' });
-    }
+      if (!event) {
+          return res.status(404).json({ msg: 'Evento não encontrado' });
+      }
 
-    res.status(200).json({ msg: 'Evento atualizado com sucesso!', evento: updatedEvent });
+      // Atualizar o evento
+      const updatedEvent = await Event.findByIdAndUpdate(id, {
+          nome,
+          descricao,
+          data_inicio,
+          data_fim,
+          local
+      }, { new: true });
+
+      res.status(200).json({ msg: 'Evento atualizado com sucesso!', evento: updatedEvent });
+
   } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ msg: 'Erro ao atualizar evento', erro: err.message });
+      console.error(err.message);
+      res.status(500).json({ msg: 'Erro ao atualizar evento', erro: err.message });
   }
 };
 
