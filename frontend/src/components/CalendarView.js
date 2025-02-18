@@ -17,20 +17,36 @@ const CalendarView = () => {
       });
   }, []);
 
+  // Filtra os eventos para o dia selecionado
+  const eventosNoDia = eventos.filter(evento => {
+    const dataEvento = new Date(evento.data_inicio);
+    return dataEvento.toDateString() === date.toDateString();
+  });
+
   return (
     <div className="calendar-page">
       <div className="calendar-view">
-        <Calendar onChange={setDate} value={date} 
+        <Calendar 
+          onChange={setDate} 
+          value={date} 
+          tileClassName={({ date, view }) => {
+            // Destacar os dias que têm eventos
+            const eventosDoDia = eventos.filter(evento => {
+              const dataEvento = new Date(evento.data_inicio);
+              return dataEvento.toDateString() === date.toDateString();
+            });
+            return eventosDoDia.length > 0 ? 'event-day' : null;
+          }}
         />
-        
       </div>
       <ul>
-        <h1>Eventos</h1>
-        {eventos
-          .filter(evento => new Date(evento.data_inicio).toDateString() === date.toDateString())
-          .map(evento => (
+        {eventosNoDia.length > 0 ? (
+          eventosNoDia.map(evento => (
             <li key={evento._id}>{evento.nome}</li>
-          ))}
+          ))
+        ) : (
+          <li>Não há eventos para este dia.</li>
+        )}
       </ul>
     </div>
   );

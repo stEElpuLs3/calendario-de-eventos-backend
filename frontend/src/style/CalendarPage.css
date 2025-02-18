@@ -35,6 +35,15 @@ html, body {
     list-style-type: none;
     margin: 10px;
     overflow-y: auto;
-    
+
+  }
+
+  .event-day {
+    background-color: #4CAF50; /* Cor de destaque para o dia */
+    color: white;
+  }
+  
+  .react-calendar__tile--active {
+    background-color: #FFD700; /* Cor quando o dia é selecionado */
   }
   
