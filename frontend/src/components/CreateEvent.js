@@ -22,7 +22,7 @@ const CreateEvent = () => {
       });
 
     try {
-      const response = await axios.post('http://localhost:5000/api/events', {
+      const response = await axios.post('http://localhost:5000/api/events/create', {
         nome,
         descricao,
         data_inicio,
