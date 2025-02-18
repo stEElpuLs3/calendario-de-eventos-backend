@@ -17,7 +17,7 @@ const userRoutes = require('./routes/userRoutes');
 const eventRoutes = require('./routes/eventRoutes'); 
 
 app.use('/api/users', userRoutes); // Rota de usuários
-app.use('/api', eventRoutes); // Rota de eventos
+app.use('/api/events', eventRoutes); // Rota de eventos
 
 const events = [
   { id: 1, title: "Evento 1", date: "2025-02-20" },

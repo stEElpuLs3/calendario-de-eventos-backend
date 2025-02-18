@@ -4,11 +4,11 @@ const Event = require('../models/eventModel');
 const { createEvent, updateEvent, deleteEvent } = require('../controllers/eventController');
 
 
-router.post('/events', createEvent);
+router.post('/create', createEvent);
 
-router.put('/events/:id', updateEvent);
+router.put('/:id', updateEvent);
 
-router.delete('/events/:id', deleteEvent);
+router.delete('/:id', deleteEvent);
 
 router.get('/list', async (req, res) => {
   try {
