@@ -1,0 +1,40 @@
+html, body {
+
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+  }
+  
+  .calendar-page {
+
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+ 
+  }
+  
+  .calendar-view {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  
+  .react-calendar {
+
+    width: 100% !important; 
+    height: 100% !important; 
+
+  }
+  
+  ul {
+
+    padding: 0;
+    list-style-type: none;
+    margin: 10px;
+    overflow-y: auto;
+    
+  }
+  

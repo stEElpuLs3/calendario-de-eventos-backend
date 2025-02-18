@@ -1,4 +1,4 @@
-// src/components/CreateEvent.js
+
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -11,7 +11,7 @@ const CreateEvent = () => {
   const [local, setLocal] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Previne o comportamento padrão do formulário
+    e.preventDefault(); 
 
     console.log('Dados do evento:', {
         nome,
@@ -20,7 +20,7 @@ const CreateEvent = () => {
         data_fim,
         local,
       });
-      
+
     try {
       const response = await axios.post('http://localhost:5000/api/events', {
         nome,

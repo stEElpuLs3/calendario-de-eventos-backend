@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Definir o schema do evento
 const eventSchema = new mongoose.Schema({
   nome: {
     type: String,
@@ -28,7 +27,6 @@ const eventSchema = new mongoose.Schema({
   }
 });
 
-// Criar o modelo de Evento com base no schema
 const Event = mongoose.model('Event', eventSchema);
 
 module.exports = Event;

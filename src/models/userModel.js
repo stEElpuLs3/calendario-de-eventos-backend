@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     required: true
   },
 }, {
-  timestamps: true // Para adicionar os campos de criação e atualização automáticos
+  timestamps: true 
 });
 
 const User = mongoose.model('User', userSchema);

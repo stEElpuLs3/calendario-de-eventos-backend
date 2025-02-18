@@ -1,4 +1,4 @@
-// controllers/eventController.js
+
 const Event = require('../models/eventModel');
 
 const createEvent = async (req, res) => {
@@ -18,7 +18,7 @@ const updateEvent = async (req, res) => {
   const { nome, descricao, data_inicio, data_fim, local } = req.body;
 
   try {
-      // Verificar se o evento existe antes de atualizar
+      // Verifica se o evento existe antes de atualizar
       const event = await Event.findById(id);
       console.log("Evento encontrado:", event);
 
@@ -59,7 +59,6 @@ const deleteEvent = async (req, res) => {
   }
 };
 
-// Exportando as funções
 module.exports = {
   createEvent,
   updateEvent,
