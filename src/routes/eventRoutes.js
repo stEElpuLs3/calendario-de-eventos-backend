@@ -39,9 +39,46 @@ router.post('/create', async (req, res) => {
   }
 });
 
-router.put('/:id', updateEvent);
+router.put('/edit/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nome, local, descricao, data_inicio, data_fim } = req.body;
 
-router.delete('/:id', deleteEvent);
+    const eventoAtualizado = await Event.findByIdAndUpdate(
+      id,
+      {
+        nome,
+        local,
+        descricao,
+        data_inicio: new Date(data_inicio).setHours(12, 0, 0, 0), // Ajuste de horário
+        data_fim: new Date(data_fim).setHours(12, 0, 0, 0), // Ajuste de horário
+      },
+      { new: true } // Retorna o documento atualizado
+    );
+
+    if (!eventoAtualizado) {
+      return res.status(404).json({ msg: 'Evento não encontrado' });
+    }
+
+    res.status(200).json(eventoAtualizado);
+  } catch (error) {
+    res.status(500).json({ msg: 'Erro ao editar evento', erro: error.message });
+  }
+});
+
+
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const eventoDeletado = await Event.findByIdAndDelete(id);
+    if (!eventoDeletado) {
+      return res.status(404).json({ msg: 'Evento não encontrado' });
+    }
+    res.status(200).json({ msg: 'Evento deletado com sucesso' });
+  } catch (error) {
+    res.status(500).json({ msg: 'Erro ao deletar evento', erro: error.message });
+  }
+});
 
 router.get('/list', async (req, res) => {
   try {

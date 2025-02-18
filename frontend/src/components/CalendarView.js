@@ -7,6 +7,13 @@ const CalendarView = () => {
   const [date, setDate] = useState(new Date());
   const [eventos, setEventos] = useState([]);
   const [eventoAtual, setEventoAtual] = useState(null);
+  const [formData, setFormData] = useState({
+    nome: '',
+    local: '',
+    descricao: '',
+    data_inicio: '',
+    data_fim: ''
+  });
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/events/list')
@@ -37,9 +44,42 @@ const CalendarView = () => {
 
   // Função para editar evento
   const handleEditar = (evento) => {
-    // Aqui você pode abrir um formulário de edição com os dados do evento
+    // Aqui você preenche o formulário com os dados do evento
     setEventoAtual(evento);
-    alert(`Editar evento: ${evento.nome}`);  // Aqui só mostramos um alerta, você pode substituir por um modal ou um formulário.
+    setFormData({
+      nome: evento.nome,
+      local: evento.local,
+      descricao: evento.descricao,
+      data_inicio: evento.data_inicio,
+      data_fim: evento.data_fim
+    });
+  };
+
+  // Função para enviar o formulário de edição
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const updatedEvento = {
+      ...formData
+    };
+
+    axios.put(`http://localhost:5000/api/events/edit/${eventoAtual._id}`, updatedEvento)
+      .then(response => {
+        setEventos(eventos.map(evento =>
+          evento._id === eventoAtual._id ? response.data : evento
+        ));
+        setEventoAtual(null); // Limpar o evento atual
+        setFormData({
+          nome: '',
+          local: '',
+          descricao: '',
+          data_inicio: '',
+          data_fim: ''
+        });
+      })
+      .catch(error => {
+        console.error("Erro ao editar evento:", error);
+      });
   };
 
   return (
@@ -78,10 +118,39 @@ const CalendarView = () => {
 
       {eventoAtual && (
         <div>
-          <h3>Evento Selecionado para Edição</h3>
-          <p>Nome: {eventoAtual.nome}</p>
-          <p>Local: {eventoAtual.local}</p>
-          <p>Descrição: {eventoAtual.descricao}</p>
+          <h3>Editar Evento</h3>
+          <form onSubmit={handleSubmit}>
+            <label>Nome:</label>
+            <input
+              type="text"
+              value={formData.nome}
+              onChange={e => setFormData({ ...formData, nome: e.target.value })}
+            />
+            <label>Local:</label>
+            <input
+              type="text"
+              value={formData.local}
+              onChange={e => setFormData({ ...formData, local: e.target.value })}
+            />
+            <label>Descrição:</label>
+            <textarea
+              value={formData.descricao}
+              onChange={e => setFormData({ ...formData, descricao: e.target.value })}
+            />
+            <label>Data Início:</label>
+            <input
+              type="datetime-local"
+              value={formData.data_inicio}
+              onChange={e => setFormData({ ...formData, data_inicio: e.target.value })}
+            />
+            <label>Data Fim:</label>
+            <input
+              type="datetime-local"
+              value={formData.data_fim}
+              onChange={e => setFormData({ ...formData, data_fim: e.target.value })}
+            />
+            <button type="submit">Salvar</button>
+          </form>
         </div>
       )}
     </div>

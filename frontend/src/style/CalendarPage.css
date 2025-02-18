@@ -47,3 +47,35 @@ html, body {
     background-color: #FFD700; /* Cor quando o dia é selecionado */
   }
   
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;  /* Tamanho do formulário, você pode ajustar */
+    margin: 0 auto;  /* Para centralizar o formulário */
+  }
+  
+  form label {
+    font-weight: bold;
+  }
+  
+  form input, form textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #0056b3;
+  }
+  

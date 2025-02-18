@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/userModel');
-const bcrypt = require('bcryptjs'); // Para hash da senha
-const jwt = require('jsonwebtoken'); // Para gerar o token JWT
+const bcrypt = require('bcryptjs'); 
+const jwt = require('jsonwebtoken'); 
+const { registerUser, loginUser } = require('../controllers/userController');
 
 // Rota para cadastro de usuário
 router.post('/register', async (req, res) => {

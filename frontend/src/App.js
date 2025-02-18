@@ -1,4 +1,3 @@
-
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -6,6 +5,9 @@ import CreateEvent from './components/CreateEvent';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import CalendarPage from './pages/CalendarPage';
+import CalendarView from './components/CalendarView';
+import Register from './components/Register';
+import Login from './components/Login';
 
 
 const App = () => {
@@ -33,8 +35,11 @@ const App = () => {
          <Router>
       <Navbar />
       <Routes>
-        <Route path="/criar" element={<CreateEvent />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/create-event" element={<CreateEvent />} />
         <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/" element={<CalendarView />} />
       </Routes>
     </Router>
       
