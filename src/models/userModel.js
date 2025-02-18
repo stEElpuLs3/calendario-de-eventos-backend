@@ -9,17 +9,15 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
-    match: [/^\S+@\S+\.\S+$/, 'Por favor, insira um email válido.']
+    unique: true
   },
   senha: {
     type: String,
     required: true
-  },
-}, {
-  timestamps: true 
+  }
 });
 
+// Hash the password before saving the user
 userSchema.pre('save', async function(next) {
   if (!this.isModified('senha')) {
     return next();

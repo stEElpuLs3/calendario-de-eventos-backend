@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const registerUser = async (req, res) => {
   const { nome, email, senha } = req.body;
 
+  console.log('Dados recebidos para registro:', req.body); // Adicionando log para verificar os dados recebidos
+
   try {
     const userExists = await User.findOne({ email });
 
@@ -22,13 +24,15 @@ const registerUser = async (req, res) => {
 
     res.status(201).json({ msg: 'Usuário registrado com sucesso' });
   } catch (err) {
-    console.error(err.message);
+    console.error('Erro ao registrar usuário:', err.message);
     res.status(500).send('Erro no servidor');
   }
 };
 
 const loginUser = async (req, res) => {
   const { email, senha } = req.body;
+
+  console.log('Dados recebidos para login:', req.body); // Adicionando log para verificar os dados recebidos
 
   try {
     const user = await User.findOne({ email });
@@ -49,7 +53,7 @@ const loginUser = async (req, res) => {
 
     res.json({ token, user: { id: user._id, nome: user.nome, email: user.email } });
   } catch (err) {
-    console.error(err.message);
+    console.error('Erro ao fazer login:', err.message);
     res.status(500).send('Erro no servidor');
   }
 };

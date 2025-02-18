@@ -17,20 +17,25 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/users/register', formData)
+    console.log('Dados enviados para registro:', formData); // Adicionando log para verificar os dados enviados
+    axios.post('http://localhost:3000/api/users/register', formData) // Certifique-se de que a URL está correta
       .then(response => {
+        console.log('Resposta do servidor:', response.data); // Adicionando log para verificar a resposta do servidor
         setMessage('Usuário registrado com sucesso!');
-        axios.post('http://localhost:5000/api/users/login', formData)
+        axios.post('http://localhost:3000/api/users/login', formData) // Certifique-se de que a URL está correta
           .then(response => {
+            console.log('Resposta do servidor (login):', response.data); // Adicionando log para verificar a resposta do servidor
             localStorage.setItem('token', response.data.token);
             setMessage('Login realizado com sucesso!');
             navigate('/'); // Redirecionar o usuário para a página principal
           })
           .catch(error => {
+            console.error('Erro ao fazer login:', error.message); // Adicionando log para verificar o erro
             setMessage('Erro ao fazer login: ' + error.message);
           });
       })
       .catch(error => {
+        console.error('Erro ao registrar usuário:', error.message); // Adicionando log para verificar o erro
         setMessage('Erro ao registrar usuário: ' + error.message);
       });
   };
