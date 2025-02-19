@@ -20,6 +20,10 @@ const registerUser = async (req, res) => {
       senha
     });
 
+    // Criptografar a senha antes de salvar
+    const salt = await bcrypt.genSalt(10);
+    user.senha = await bcrypt.hash(senha, salt);
+
     await user.save();
 
     res.status(201).json({ msg: 'Usuário registrado com sucesso' });

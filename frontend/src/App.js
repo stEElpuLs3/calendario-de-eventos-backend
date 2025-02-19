@@ -1,6 +1,8 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import CreateEvent from './components/CreateEvent'; 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -16,7 +18,7 @@ const App = () => {
   
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/events'); 
+      const response = await axios.get('http://localhost:3000/api/events'); 
       setEvents(response.data);
     } catch (error) {
       console.error("Error fetching events:", error);

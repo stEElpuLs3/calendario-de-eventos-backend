@@ -16,7 +16,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/users/login', formData)
+    axios.post('http://localhost:3000/api/users/login', formData)
       .then(response => {
         localStorage.setItem('token', response.data.token);
         setMessage('Login realizado com sucesso!');

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Importando o CSS do Bootstrap
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -41,17 +42,23 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="container mt-5">
       <form onSubmit={handleSubmit}>
-        <label>Nome:</label>
-        <input type="text" name="nome" value={formData.nome} onChange={handleChange} />
-        <label>Email:</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange} />
-        <label>Senha:</label>
-        <input type="password" name="senha" value={formData.senha} onChange={handleChange} />
-        <button type="submit">Registrar</button>
+        <div className="mb-3">
+          <label className="form-label">Nome:</label>
+          <input type="text" name="nome" value={formData.nome} onChange={handleChange} className="form-control" />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Email:</label>
+          <input type="email" name="email" value={formData.email} onChange={handleChange} className="form-control" />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Senha:</label>
+          <input type="password" name="senha" value={formData.senha} onChange={handleChange} className="form-control" />
+        </div>
+        <button type="submit" className="btn btn-primary">Registrar</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className="mt-3">{message}</p>}
     </div>
   );
 };
